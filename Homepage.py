@@ -127,8 +127,9 @@ else:
     for row in rows.data:
         data = {
             'Thần số học': row['thansohoc'],
+            'Sinh trắc học': row['sinhtrachoc'],
             'Nhân tướng học': row['nhantuonghoc'],
-            'Sinh trắc học': row['sinhtrachoc']
+            
 
     }
     st.write(name)
@@ -157,7 +158,7 @@ else:
 
     if data['Nhân tướng học']>0:
         # Nút bấm cho Nhân tướng học
-        create_link_or_warning(nhantuonghoc_link, "Nhân tướng học")
+        create_link_or_warning(nhantuonghoc_link_vip, "Nhân tướng học")
         st.write("Nhân tướng học là nghiên cứu về các đặc điểm gương mặt để xác định tính cách và tương lai của một người.")
     else:
         
