@@ -57,7 +57,7 @@ if "show_login" in st.session_state and st.session_state["show_login"]:
         if st.session_state["username"]:
             st.success(f"Welcome {st.session_state['username']}")
             status = True
-            name=st.session_state['username']}
+            name=st.session_state['username']
         else:
             st.success("Welcome guest")
             status = True
