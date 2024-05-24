@@ -49,6 +49,7 @@ with col3:
         status = False
         st.session_state["authenticated"]=False
         name=None
+        st.session_state["username"]=False
         st.write("You've been signed out!") 
 # Nếu người dùng nhấn nút đăng nhập, hiển thị form đăng nhập
 if "show_login" in st.session_state and st.session_state["show_login"]:
@@ -60,7 +61,7 @@ if "show_login" in st.session_state and st.session_state["show_login"]:
             name=st.session_state['username']
         else:
             st.success("Welcome guest")
-            st.session_state["username"]='guest'
+            
             status = True
             name=None
 
