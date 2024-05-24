@@ -75,7 +75,7 @@ if "show_login" in st.session_state and st.session_state["show_login"]:
 st.title("Chào mừng đến với Direction-Pathway")
 st.write(
     "Chúng ta hãy khám phá những khía cạnh thú vị về vận mệnh và tính cách của bạn thông qua thần số học, sinh trắc học và nhân tướng học")
-st.write(name)
+
 
 
 
