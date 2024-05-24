@@ -121,14 +121,9 @@ else:
     # @st.cache_data
     @st.cache_resource
     def run_query():
-        return supabase.table("feature").select("*").execute()
+        return supabase.table("feature").select("*").eq("username", name).execute()
 
     rows = run_query()
-    # Tạo dữ liệu cho bảng
-    # table = {
-    #     'Cột 1': ['thansohoc', 'nhantuonghoc', 'sinhtrachoc'],
-    #     'Cột 2': [data['thansohoc'], data['nhantuonghoc'],data['sinhtrachoc']]
-    # }
     
     # Chuyển đổi dữ liệu thành DataFrame
     # df = pd.DataFrame(table)
