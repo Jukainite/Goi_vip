@@ -16,6 +16,18 @@ nhantuonghoc_link_vip = "https://directionalpathway-nhantuonghoc-vip.streamlit.a
 status = False
 
 
+# Initialize connection.
+# Uses st.cache_resource to only run once.
+@st.cache_resource
+def init_connection():
+    url = st.secrets["https://azryutrztuxzsfkvelkh.supabase.co"]
+    key = st.secrets["eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF6cnl1dHJ6dHV4enNma3ZlbGtoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTY1NDYxOTAsImV4cCI6MjAzMjEyMjE5MH0.Gw9QOe2b2Ik-qa1YnLufpPcyq2TlirnUBNOR7KaW7dk"]
+    return create_client(url, key)
+
+supabase = init_connection()
+
+
+
 def set_background_image():
     page_bg_img = f"""
     <style>
@@ -104,6 +116,24 @@ if name is None:
     create_link_or_warning(nhantuonghoc_link, "Nhân tướng học")
     st.write("Nhân tướng học là nghiên cứu về các đặc điểm gương mặt để xác định tính cách và tương lai của một người.")
 else:
+    # Perform query.
+    # Uses st.cache_data to only rerun when the query changes or after 10 min.
+    @st.cache_data(ttl=600)
+    def run_query(name):
+        query = f"""
+        SELECT pet FROM mytable WHERE username = '{name}';
+        """
+        return supabase.sql(query)
+    data = run_query(name)
+    # Tạo dữ liệu cho bảng
+    table = {
+        'Cột 1': ['thansohoc', 'nhantuonghoc', 'sinhtrachoc'],
+        'Cột 2': [data['thansohoc'], data['nhantuonghoc'],data['sinhtrachoc']]
+    }
+    
+    # Chuyển đổi dữ liệu thành DataFrame
+    df = pd.DataFrame(table)
+
     # Nút bấm cho Thần số học
     create_link_or_warning(thanosohoc_link_vip, "Thần số học")
     st.write("Thần số học là nghệ thuật dựa trên việc phân tích các số liên quan đến ngày, tháng và năm sinh của bạn để hiểu về vận mệnh và tính cách.")
