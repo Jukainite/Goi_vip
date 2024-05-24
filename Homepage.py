@@ -27,7 +27,6 @@ def init_connection():
 supabase = init_connection()
 
 
-
 def set_background_image():
     page_bg_img = f"""
     <style>
@@ -122,7 +121,7 @@ else:
     @st.cache_resource
     def run_query(name):
         return supabase.table("feature").select("*").eq("username", name).execute()
-
+    
     rows = run_query(name)
     for row in rows.data:
         data = {
@@ -135,13 +134,18 @@ else:
     st.write(name)
     st.write('Số lượt VIP ở mỗi chức năng của bạn ')
     st.write(data)
-
+    @st.cache_resource
+    def update_quantity(row_id,name):
+        supabase.table("feature").update({row_id: supabase.raw(f'{row_id} - 1')}).eq('username', name).execute()
+    
+    
 
     
     if data['Thần số học']>0:
         # Nút bấm cho Thần số học
         create_link_or_warning(thanosohoc_link_vip, "Thần số học")
         st.write("Thần số học là nghệ thuật dựa trên việc phân tích các số liên quan đến ngày, tháng và năm sinh của bạn để hiểu về vận mệnh và tính cách.")
+        update_quantity("thanosohoc",name)
     else:
         # Nút bấm cho Thần số học
         create_link_or_warning(thanosohoc_link, "Thần số học")
