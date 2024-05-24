@@ -136,7 +136,10 @@ else:
     st.write(data)
     @st.cache_resource
     def update_quantity(row_id,name):
-        supabase.table("feature").update({row_id: supabase.raw(f'{row_id} - 1')}).eq('username', name).execute()
+        current_quantity = supabase.table("feature").select(row_id).eq('username', name).execute().get_single()[row_id]
+        new_quantity = max(current_quantity - 1, 0)  # Ensure quantity doesn't go below 0
+        supabase.table("feature").update({row_id: new_quantity}).eq('username', name).execute()
+
     
     
 
