@@ -131,7 +131,7 @@ else:
             'sinhtrachoc': row['nhantuonghoc']
 
     }
-  
+    st.write(data)
 
 
     
