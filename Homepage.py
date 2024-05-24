@@ -124,17 +124,19 @@ else:
         return supabase.table("feature").select("*").eq("username", name).execute()
 
     rows = run_query()
+    for row in rows.data:
+        st.write(row)
     # Tạo dữ liệu cho bảng
-    data = {
-        'Cột 1': ['thansohoc', 'nhantuonghoc', 'sinhtrachoc'],
-        'Cột 2': [rows[0]['thansohoc'],rows[0]['nhantuonghoc'], rows[0]['nhantuonghoc']]
-    }
+    # data = {
+    #     'Cột 1': ['thansohoc', 'nhantuonghoc', 'sinhtrachoc'],
+    #     'Cột 2': [rows[0]['thansohoc'],rows[0]['nhantuonghoc'], rows[0]['nhantuonghoc']]
+    # }
     
-    # Chuyển đổi dữ liệu thành DataFrame
-    df = pd.DataFrame(data)
+    # # Chuyển đổi dữ liệu thành DataFrame
+    # df = pd.DataFrame(data)
     
     # Hiển thị bảng
-    st.table(df)
+    # st.table(df)
     # Chuyển đổi dữ liệu thành DataFrame
     # df = pd.DataFrame(table)
     st.write(rows)
