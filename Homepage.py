@@ -1,6 +1,9 @@
 
 import streamlit as st
 from st_login_form import login_form
+from supabase import create_client, Client
+
+
 # Đường link đến trang Thần số học, Sinh trắc học, Nhân tướng học
 thanosohoc_link = "https://directionalpathway-thansohoc-free.streamlit.app/"
 sinhtrachoc_link = "https://directionalpathway-sinhtrachoc-free.streamlit.app/"
@@ -33,7 +36,7 @@ hide_streamlit_style = """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 # set_background_image()
 col1, col2, col3 = st.columns([3, 1, 1])  # Chia layout thành 3 cột
-
+name=None
 with col2:
     if not status:
         if st.button("Sign In"):
@@ -45,6 +48,7 @@ with col3:
     if st.button("Sign Out"):
         status = False
         st.session_state["authenticated"]=False
+        name=None
         st.write("You've been signed out!") 
 # Nếu người dùng nhấn nút đăng nhập, hiển thị form đăng nhập
 if "show_login" in st.session_state and st.session_state["show_login"]:
@@ -53,14 +57,16 @@ if "show_login" in st.session_state and st.session_state["show_login"]:
         if st.session_state["username"]:
             st.success(f"Welcome {st.session_state['username']}")
             status = True
+            name=st.session_state['username']}
         else:
             st.success("Welcome guest")
             status = True
+            name=None
 
     else:
         st.error("Not authenticated")
         status = False
-
+        name=None
 
 
 # Tiêu đề của trang
@@ -82,14 +88,27 @@ def create_link_or_warning(link, name):
 
 
 # Chuyển trang tới đường link "Thần số học" khi tiêu đề được nhấp
-# Nút bấm cho Thần số học
-create_link_or_warning(thanosohoc_link, "Thần số học")
-st.write("Thần số học là nghệ thuật dựa trên việc phân tích các số liên quan đến ngày, tháng và năm sinh của bạn để hiểu về vận mệnh và tính cách.")
-
-# Nút bấm cho Sinh trắc học
-create_link_or_warning(sinhtrachoc_link, "Sinh trắc học")
-st.write("Sinh trắc học vân tay là nghiên cứu về các đặc điểm vân tay để xác định tính cách và tương lai của một người.")
-
-# Nút bấm cho Nhân tướng học
-create_link_or_warning(nhantuonghoc_link, "Nhân tướng học")
-st.write("Nhân tướng học là nghiên cứu về các đặc điểm gương mặt để xác định tính cách và tương lai của một người.")
+if name ==None:
+    # Nút bấm cho Thần số học
+    create_link_or_warning(thanosohoc_link, "Thần số học")
+    st.write("Thần số học là nghệ thuật dựa trên việc phân tích các số liên quan đến ngày, tháng và năm sinh của bạn để hiểu về vận mệnh và tính cách.")
+    
+    # Nút bấm cho Sinh trắc học
+    create_link_or_warning(sinhtrachoc_link, "Sinh trắc học")
+    st.write("Sinh trắc học vân tay là nghiên cứu về các đặc điểm vân tay để xác định tính cách và tương lai của một người.")
+    
+    # Nút bấm cho Nhân tướng học
+    create_link_or_warning(nhantuonghoc_link, "Nhân tướng học")
+    st.write("Nhân tướng học là nghiên cứu về các đặc điểm gương mặt để xác định tính cách và tương lai của một người.")
+else:
+    # Nút bấm cho Thần số học
+    create_link_or_warning(thanosohoc_link_vip, "Thần số học")
+    st.write("Thần số học là nghệ thuật dựa trên việc phân tích các số liên quan đến ngày, tháng và năm sinh của bạn để hiểu về vận mệnh và tính cách.")
+    
+    # Nút bấm cho Sinh trắc học
+    create_link_or_warning(thanosohoc_link_vip, "Sinh trắc học")
+    st.write("Sinh trắc học vân tay là nghiên cứu về các đặc điểm vân tay để xác định tính cách và tương lai của một người.")
+    
+    # Nút bấm cho Nhân tướng học
+    create_link_or_warning(thanosohoc_link_vip, "Nhân tướng học")
+    st.write("Nhân tướng học là nghiên cứu về các đặc điểm gương mặt để xác định tính cách và tương lai của một người.")
