@@ -1,18 +1,63 @@
+
 import streamlit as st
+from st_login_form import login_form
 # Đường link đến trang Thần số học, Sinh trắc học, Nhân tướng học
+thanosohoc_link = "https://directionalpathway-thansohoc-free.streamlit.app/"
+sinhtrachoc_link = "https://directionalpathway-sinhtrachoc-free.streamlit.app/"
+nhantuonghoc_link = "https://directionalpathway-nhantuonghoc-free.streamlit.app/"
+login_link = "https://directionalpathway-dangnhap.streamlit.app/"
 thanosohoc_link_vip = "https://directionalpathway-thansohoc-vip.streamlit.app/"
 sinhtrachoc_link_vip = "https://directionalpathway-sinhtrachoc-vip.streamlit.app/"
 nhantuonghoc_link_vip = "https://directionalpathway-nhantuonghoc-vip.streamlit.app/"
-# Cài đặt trang để hiển thị layout "wide"
-st.set_page_config(layout="wide")
-col1, col2 = st.columns([12, 1])
 
-with col1:
-    st.markdown('<a href="{}" style="color: white; text-decoration: none;"><button style="background-color: #DD83E0; border: none; border-radius: 5px; padding: 10px 20px; cursor: pointer;">Sign In</button></a>'.format(thanosohoc_link), unsafe_allow_html=True)
+status = False
 
-# Đặt nút "Sign Up" trong cột thứ hai
+
+def set_background_image():
+    page_bg_img = f"""
+    <style>
+    .stApp {{
+        background: url("https://img.upanh.tv/2024/05/24/4-wxLLDdDYg-transformed.png");
+        background-size: cover
+    }}
+    </style>
+    """
+    st.markdown(page_bg_img, unsafe_allow_html=True)
+hide_streamlit_style = """
+                <style>
+                #MainMenu {visibility: hidden;}
+                footer {visibility: hidden;}
+                header {visibility: hidden;}
+                </style>
+                """
+st.markdown(hide_streamlit_style, unsafe_allow_html=True)
+# set_background_image()
+col1, col2 = st.columns([4, 1])
+
 with col2:
-    st.markdown('<a href="{}" style="color: white; text-decoration: none;"><button style="background-color: #DD83E0; border: none; border-radius: 5px; padding: 10px 20px; cursor: pointer;">Sign Up</button></a>'.format(thanosohoc_link), unsafe_allow_html=True)
+    if not status:
+        if st.button("Sign In"):
+            st.session_state["show_login"] = True
+    else:
+        st.success(f"Welcome {st.session_state['username']}")
+
+# Nếu người dùng nhấn nút đăng nhập, hiển thị form đăng nhập
+if "show_login" in st.session_state and st.session_state["show_login"]:
+    login_form()
+    if st.session_state["authenticated"]:
+        if st.session_state["username"]:
+            st.success(f"Welcome {st.session_state['username']}")
+            status = True
+        else:
+            st.success("Welcome guest")
+            status = True
+
+    else:
+        st.error("Not authenticated")
+        status = False
+
+
+
 # Tiêu đề của trang
 st.title("Chào mừng đến với Direction-Pathway")
 st.write(
@@ -23,20 +68,23 @@ st.write(
 # Tiêu đề "Thần số học" sẽ là một hyperlink
 st.title("Chào mừng đến với Trang chủ Thần số học, Sinh trắc học vân tay và Nhân tướng học")
 st.write("Chúng ta hãy khám phá những khía cạnh thú vị về vận mệnh, tính cách và vân tay của bạn!")
+# Hàm để kiểm tra trạng thái đăng nhập và chuyển hướng
+def create_link_or_warning(link, name):
+    if status:
+        st.markdown(f'<a href="{link}" target="_blank" style="text-decoration: none;"><button style="background-color: #DD83E0; border: none; border-radius: 5px; padding: 10px 20px; cursor: pointer;">{name}</button></a>', unsafe_allow_html=True)
+    else:
+        st.warning(f"Bạn chưa đăng nhập. Vui lòng đăng nhập để truy cập chức năng {name} này.")
+
 
 # Chuyển trang tới đường link "Thần số học" khi tiêu đề được nhấp
-st.markdown('<h2 style="color: #DD83E0;"><a style="color: #DD83E0;text-decoration: none;" href="{}">Thần số học</a></h2>'.format(thanosohoc_link), unsafe_allow_html=True)
-st.write(
-    "Thần số học là nghệ thuật dựa trên việc phân tích các số liên quan đến ngày, tháng và năm sinh của bạn để hiểu về vận mệnh và tính cách.")
+# Nút bấm cho Thần số học
+create_link_or_warning(thanosohoc_link, "Thần số học")
+st.write("Thần số học là nghệ thuật dựa trên việc phân tích các số liên quan đến ngày, tháng và năm sinh của bạn để hiểu về vận mệnh và tính cách.")
 
-# Chuyển trang tới đường link "Sinh trắc học" khi tiêu đề được nhấp
-st.markdown('<h2 style="color: #DD83E0;"><a style="color: #DD83E0;text-decoration: none;" href="{}">Sinh trắc học</a></h2>'.format(sinhtrachoc_link), unsafe_allow_html=True)
-st.write(
-    "Sinh trắc học vân tay là nghiên cứu về các đặc điểm vân tay để xác định tính cách và tương lai của một người.")
+# Nút bấm cho Sinh trắc học
+create_link_or_warning(sinhtrachoc_link, "Sinh trắc học")
+st.write("Sinh trắc học vân tay là nghiên cứu về các đặc điểm vân tay để xác định tính cách và tương lai của một người.")
 
-# Chuyển trang tới đường link "Nhân tướng học" khi tiêu đề được nhấp
-st.markdown('<h2 style="color: #DD83E0;"><a style="color: #DD83E0;text-decoration: none;" href="{}">Nhân tướng học</a></h2>'.format(nhantuonghoc_link), unsafe_allow_html=True)
-st.write(
-    "Nhân tướng học là nghiên cứu về các đặc điểm gương mặt để xác định tính cách và tương lai của một người.")
-
-
+# Nút bấm cho Nhân tướng học
+create_link_or_warning(nhantuonghoc_link, "Nhân tướng học")
+st.write("Nhân tướng học là nghiên cứu về các đặc điểm gương mặt để xác định tính cách và tương lai của một người.")
