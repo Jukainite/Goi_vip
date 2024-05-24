@@ -45,7 +45,7 @@ hide_streamlit_style = """
                 </style>
                 """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
-# set_background_image()
+set_background_image()
 col1, col2, col3 = st.columns([3, 1, 1])  # Chia layout thành 3 cột
 name=None
 with col2:
