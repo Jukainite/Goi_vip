@@ -120,10 +120,10 @@ else:
     # Uses st.cache_data to only rerun when the query changes or after 10 min.
     # @st.cache_data
     @st.cache_resource
-    def run_query():
+    def run_query(name):
         return supabase.table("feature").select("*").eq("username", name).execute()
 
-    rows = run_query()
+    rows = run_query(name)
     for row in rows.data:
         data = {
             'Thần số học': row['thansohoc'],
@@ -131,6 +131,7 @@ else:
             'Sinh trắc học': row['nhantuonghoc']
 
     }
+    st.write(name)
     st.write('Số lượt VIP ở mỗi chức năng của bạn ')
     st.write(data)
 
