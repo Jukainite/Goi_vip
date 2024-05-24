@@ -88,7 +88,7 @@ def create_link_or_warning(link, name):
 
 
 # Chuyển trang tới đường link "Thần số học" khi tiêu đề được nhấp
-if name ==None:
+if name is None:
     # Nút bấm cho Thần số học
     create_link_or_warning(thanosohoc_link, "Thần số học")
     st.write("Thần số học là nghệ thuật dựa trên việc phân tích các số liên quan đến ngày, tháng và năm sinh của bạn để hiểu về vận mệnh và tính cách.")
