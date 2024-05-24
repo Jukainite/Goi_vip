@@ -118,8 +118,8 @@ if name is None:
 else:
     # Perform query.
     # Uses st.cache_data to only rerun when the query changes or after 10 min.
-    # @st.cache_data()
-    @st.cache_resource
+    @st.cache_data
+    # @st.cache_resource
     def run_query(name):
         return supabase.table("feature").select('*').eq("username", name).execute()
 
