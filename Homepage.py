@@ -133,13 +133,11 @@ else:
     
     
     # # Chuyển đổi dữ liệu thành DataFrame
-    # df = pd.DataFrame(data)
+    df = pd.DataFrame(data)
+    st.table(df)
+
     
-    # Hiển thị bảng
-    # st.table(df)
-    # Chuyển đổi dữ liệu thành DataFrame
-    # df = pd.DataFrame(table)
-    st.write(rows)
+    
     # Nút bấm cho Thần số học
     create_link_or_warning(thanosohoc_link_vip, "Thần số học")
     st.write("Thần số học là nghệ thuật dựa trên việc phân tích các số liên quan đến ngày, tháng và năm sinh của bạn để hiểu về vận mệnh và tính cách.")
