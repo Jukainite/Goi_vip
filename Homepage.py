@@ -120,10 +120,9 @@ else:
     # Uses st.cache_data to only rerun when the query changes or after 10 min.
     @st.cache_data(ttl=600)
     def run_query(name):
-        query = f"""
-        SELECT pet FROM mytable WHERE username = '{name}';
-        """
-        return supabase.sql(query)
+        return supabase.table("mytable").select(username==name).execute()
+
+
     data = run_query(name)
     # Tạo dữ liệu cho bảng
     table = {
