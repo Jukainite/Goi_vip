@@ -60,6 +60,7 @@ if "show_login" in st.session_state and st.session_state["show_login"]:
             name=st.session_state['username']
         else:
             st.success("Welcome guest")
+            st.session_state["username"]='guest'
             status = True
             name=None
 
