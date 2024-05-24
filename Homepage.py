@@ -119,20 +119,19 @@ else:
     # Perform query.
     # Uses st.cache_data to only rerun when the query changes or after 10 min.
     @st.cache_data
-    # @st.cache_resource
-    def run_query(name):
-        return supabase.table("feature").select('*').eq("username", name).execute()
+    def run_query():
+    return supabase.table("mytable").select("*").execute()
 
-    data = run_query(name)
+    rows = run_query()
     # Tạo dữ liệu cho bảng
-    table = {
-        'Cột 1': ['thansohoc', 'nhantuonghoc', 'sinhtrachoc'],
-        'Cột 2': [data['thansohoc'], data['nhantuonghoc'],data['sinhtrachoc']]
-    }
+    # table = {
+    #     'Cột 1': ['thansohoc', 'nhantuonghoc', 'sinhtrachoc'],
+    #     'Cột 2': [data['thansohoc'], data['nhantuonghoc'],data['sinhtrachoc']]
+    # }
     
     # Chuyển đổi dữ liệu thành DataFrame
-    df = pd.DataFrame(table)
-
+    # df = pd.DataFrame(table)
+    st.write(rows)
     # Nút bấm cho Thần số học
     create_link_or_warning(thanosohoc_link_vip, "Thần số học")
     st.write("Thần số học là nghệ thuật dựa trên việc phân tích các số liên quan đến ngày, tháng và năm sinh của bạn để hiểu về vận mệnh và tính cách.")
