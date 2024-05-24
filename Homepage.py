@@ -40,7 +40,12 @@ with col2:
             st.session_state["show_login"] = True
     else:
         st.success(f"Welcome {st.session_state['username']}")
-
+# Nút "Sign Out" và chức năng
+with col3:
+    if st.button("Sign Out"):
+        status = False
+        st.session_state["authenticated"]=False
+        st.write("You've been signed out!") 
 # Nếu người dùng nhấn nút đăng nhập, hiển thị form đăng nhập
 if "show_login" in st.session_state and st.session_state["show_login"]:
     login_form()
