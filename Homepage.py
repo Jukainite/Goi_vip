@@ -126,24 +126,39 @@ else:
     rows = run_query()
     for row in rows.data:
         data = {
-            'thansohoc': row['thansohoc'],
-            'nhantuonghoc': row['nhantuonghoc'],
-            'sinhtrachoc': row['nhantuonghoc']
+            'Thần số học': row['thansohoc'],
+            'Nhân tướng học': row['nhantuonghoc'],
+            'Sinh trắc học': row['nhantuonghoc']
 
     }
+    st.write('Số lượt VIP ở mỗi chức năng của bạn ')
     st.write(data)
 
 
     
-    
-    # Nút bấm cho Thần số học
-    create_link_or_warning(thanosohoc_link_vip, "Thần số học")
-    st.write("Thần số học là nghệ thuật dựa trên việc phân tích các số liên quan đến ngày, tháng và năm sinh của bạn để hiểu về vận mệnh và tính cách.")
-    
-    # Nút bấm cho Sinh trắc học
-    create_link_or_warning(thanosohoc_link_vip, "Sinh trắc học")
-    st.write("Sinh trắc học vân tay là nghiên cứu về các đặc điểm vân tay để xác định tính cách và tương lai của một người.")
-    
-    # Nút bấm cho Nhân tướng học
-    create_link_or_warning(thanosohoc_link_vip, "Nhân tướng học")
-    st.write("Nhân tướng học là nghiên cứu về các đặc điểm gương mặt để xác định tính cách và tương lai của một người.")
+    if data['Thần số học']>0:
+        # Nút bấm cho Thần số học
+        create_link_or_warning(thanosohoc_link_vip, "Thần số học")
+        st.write("Thần số học là nghệ thuật dựa trên việc phân tích các số liên quan đến ngày, tháng và năm sinh của bạn để hiểu về vận mệnh và tính cách.")
+    else:
+        # Nút bấm cho Thần số học
+        create_link_or_warning(thanosohoc_link, "Thần số học")
+        st.write("Thần số học là nghệ thuật dựa trên việc phân tích các số liên quan đến ngày, tháng và năm sinh của bạn để hiểu về vận mệnh và tính cách.")
+
+    if data['Sinh trắc học']>0:
+        # Nút bấm cho Sinh trắc học
+        create_link_or_warning(sinhtrachoc_link_vip, "Sinh trắc học")
+        st.write("Sinh trắc học vân tay là nghiên cứu về các đặc điểm vân tay để xác định tính cách và tương lai của một người.")
+    else:
+       
+        create_link_or_warning(sinhtrachoc_link, "Sinh trắc học")
+        st.write("Thần số học là nghệ thuật dựa trên việc phân tích các số liên quan đến ngày, tháng và năm sinh của bạn để hiểu về vận mệnh và tính cách.")
+
+    if data['Nhân tướng học']>0:
+        # Nút bấm cho Nhân tướng học
+        create_link_or_warning(nhantuonghoc_link, "Nhân tướng học")
+        st.write("Nhân tướng học là nghiên cứu về các đặc điểm gương mặt để xác định tính cách và tương lai của một người.")
+    else:
+        
+        create_link_or_warning(nhantuonghoc_link, "Nhân tướng học")
+        st.write("Thần số học là nghệ thuật dựa trên việc phân tích các số liên quan đến ngày, tháng và năm sinh của bạn để hiểu về vận mệnh và tính cách.")
