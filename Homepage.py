@@ -128,7 +128,7 @@ else:
         data = {
             'Thần số học': row['thansohoc'],
             'Nhân tướng học': row['nhantuonghoc'],
-            'Sinh trắc học': row['nhantuonghoc']
+            'Sinh trắc học': row['sinhtrachoc']
 
     }
     st.write(name)
