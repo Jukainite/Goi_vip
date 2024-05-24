@@ -57,7 +57,7 @@ def so_chu_dao(ngay_thang_nam_sinh):
     tong = tong_chu_so_ngay + tong_chu_so_thang + tong_chu_so_nam
 
     # Tính số chủ đạo từ tổng
-    while tong >= 10:
+    while tong > 10:
         if tong == 11 or tong == 22 or tong == 33:
             return tong
         tong = tong_chu_so(tong)
