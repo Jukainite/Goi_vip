@@ -126,15 +126,13 @@ else:
     rows = run_query()
     for row in rows.data:
         data = {
-        'Cột 1': ['thansohoc', 'nhantuonghoc', 'sinhtrachoc'],
-        'Cột 2': [row['thansohoc'],row['nhantuonghoc'], row['nhantuonghoc']]
+            'thansohoc': row['thansohoc'],
+            'nhantuonghoc': row['nhantuonghoc'],
+            'sinhtrachoc': row['nhantuonghoc']
+
     }
-    # Tạo dữ liệu cho bảng
-    
-    
-    # # Chuyển đổi dữ liệu thành DataFrame
-    df = pd.DataFrame(data)
-    st.table(df)
+  
+
 
     
     
