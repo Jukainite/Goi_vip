@@ -133,7 +133,9 @@ else:
     }
 
     st.write('Số tháng VIP ở mỗi chức năng của bạn ')
-    st.write(data)
+    st.write(f'Thần số học: {data['Thần số học']}')
+    st.write(f'Sinh trắc học: {data['Sinh trắc học']}')
+    st.write(f'Nhân tướng học: {data['Nhân tướng học']}')
     # @st.cache_resource
     # def update_quantity(row_id,name):
     #     current_quantity = supabase.table("feature").select(row_id).eq('username', name).execute().get_single()[row_id]
