@@ -61,7 +61,7 @@ with col3:
         st.session_state["authenticated"]=False
         name=None
         st.session_state["username"]=False
-        st.write("You've been signed out!") 
+
 # Nếu người dùng nhấn nút đăng nhập, hiển thị form đăng nhập
 if "show_login" in st.session_state and st.session_state["show_login"]:
     login_form()
